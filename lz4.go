@@ -37,7 +37,7 @@ func (z *lz4ReaderWrapper) refill(off int) (int, error) {
 	if err != nil {
 		return 0, fmt.Errorf("io.ReadFull: %v", err)
 	}
-	n, err := lz4.UncompressBlock(inBuf, z.out, off)
+    n, err := lz4.UncompressBlock(inBuf, z.out[off:])
 	if err != nil {
 		return 0, fmt.Errorf("lz4.UncompressBlock: %v", err)
 	}
